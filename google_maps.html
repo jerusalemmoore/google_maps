@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDstJ7xYG19hbFBkZxQ-U-z1z_G_4u5mY4&libraries=places&callback=initMap" async defer></script>
+  <script src="js/google_maps.js" type="text/javascript" async defer></script>
+
+  <!-- LOAD GOOGLEMAPS API LIBRAY AND CALL initMap FUNCTION -->
+
+   <!-- <script src="https://maps.googleapis.com/maps/api/js?key==AIzaSyDstJ7xYG19hbFBkZxQ-U-z1z_G_4u5mY4&libraries=places"> -->
+</head>
+<style>
+  body{
+    background-image: url("https://www.komar.de/en/media/catalog/product/cache/5/image/9df78eab33525d08d6e5fb8d27136e95/4/-/4-050_worldmap_neu_ma_1.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+/* p#intro{
+  margin: auto;
+} */
+.grid-container {
+  display: grid;
+  grid-template-columns: 100%;
+  /* background-color: #2196F3; */
+  padding: 10px;
+}
+.grid-item{
+  background-color: rgba(255, 255, 255, 0.8);
+ /* border: 1px solid rgba(0, 0, 0, 0.8); */
+ /* padding: 20px; */
+ /* font-size: 30px; */
+ text-align:center;
+}
+button#errand{
+  background-color: deepskyblue;
+  padding:15px;
+  margin:10px;
+  transition-duration: .4s
+  text-align: center;
+  border-radius: 12px;
+
+}
+button#errand:hover{
+  color:white;
+}
+div#googleMap {
+  position:relative;
+  float: right;
+  padding-left: 200px;
+  padding-right: 200px;
+  width: 25%;
+  height:400px;
+  border-style: solid;
+  border-width: thick;
+
+}
+ul#places{
+  list-style-type: none;
+  /* display:flex; */
+  text-align:center;
+  /* background-color: rgba(255, 255, 255, 0.8); */
+  overflow:hidden; overflow-y:scroll;
+  height:200px;
+  /* visibility: collapse; */
+}
+li#place{
+  cursor:pointer;
+  /* transition-duration: .4s; */
+  text-align:center;
+}
+li#place:hover{
+  background-color: black;
+  color:white;
+}
+.column {
+  width:50% 50%
+  display: flex;
+  flex-direction: column;
+   flex: 1;
+  overflow:hidden;
+  align-items: center;
+  justify-content:center;
+}
+h1#title{
+  text-align:center;
+}
+
+</style>
+<body>
+
+<h1 id=title>My First Google Map</h1>
+
+  <div id="googleMap" ></div>
+  <!-- <div class="grid-container"> -->
+    <div class="grid-container">
+      <div class="grid-item" style="border-width:thin;border-style:solid;">
+      <h2>Places</h2>
+      </div>
+      <div class="grid-item" style="border-width:thin;border-style:solid;">
+        <ul id="places" ></ul>
+    </div>
+  </div>
+<!-- </div> -->
+
+<div class="column">
+    <div class="grid-container">
+      <div class="grid-item">
+        <p>
+            This page was built in order to practice using the google maps api. Currently
+            I'm working on orienting the map on the screen and formatting text around
+            it. I would like to add a button that allows a user to see their location
+            on the map.
+        </p>
+      </div>
+      <div class="grid-item">
+        <p>
+        <b>
+          Press this button to make the map zip to your current location.
+        </b>
+      </p>
+          <button id="locateButton" onclick="getLocation()">Get Location</button>
+      </div>
+      <div class="grid-item">
+        <p>
+          By finding your location I can get your zipcode using the geocoding api
+        </p>
+        <p>
+          Your current zipcode is:
+        </p>
+         <p id="zip"></p>
+      </div>
+    </div>
+
+    <div class="grid-container">
+      <div class="grid-item">
+        <p>Next I would like to build some buttons of errands to run, my plan
+          is to let the user choose what they want to do and where they want run the
+          errand. After receiving information I want to give an estimated time to
+          do all tasks
+      </div>
+    </div>
+  <div class="grid-container">
+    <div class="grid-item">
+      <div class="column">
+      <button id="errand" onclick="findStores()">Errand 1</button>
+        <button id="errand">Errand 2</button>
+        <button id="errand" >Errand 3</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+<script defer>
+  document.getElementById("zip").innerHTML = "N/A";
+</script>
+</html>

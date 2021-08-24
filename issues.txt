@@ -1,0 +1,19 @@
+Button for finding Location fixed
+NEXT STEPS
+-try to find way to get location and present the zipcode to the user.
+-clean up current code and comment in areas necessary
+-think about ways to find certain spots for shopping appointments, etc.
+  -maybe try to let user enter errands they want to take care of
+    Options:
+      groceries
+      gas
+      doctors
+      practice
+      food
+    -ask order they want to do things
+    -ask where task will be done
+    -ask user to enter estimated time to do each task
+    -given order, find the shortest location to take care of each task
+    -sum up time to get to each location as and add time exclusive to each task
+    -present user with estimated time and route to take care of all tasks
+  -finish vue mastery
