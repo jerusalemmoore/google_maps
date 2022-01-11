@@ -1,5 +1,6 @@
 "use strict";
 let map, infoWindow;
+//current position
 var pos;
 
 function initMap() {

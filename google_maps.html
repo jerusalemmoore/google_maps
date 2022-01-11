@@ -20,20 +20,36 @@
   /* p#intro{
   margin: auto;
 } */
-  .grid-container {
+  /* .grid-container {
     display: grid;
     grid-template-columns: 100%;
     /* background-color: #2196F3; */
-    padding: 10px;
-  }
+  /* padding: 10px; */
+
 
   button#moreButton {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: deepskyblue;
     font-family: "Times New Roman", Times, serif;
-    /* padding: 10px; */
+    padding: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
     margin: 10px;
-    bottom: 0;
-    right: 0;
+    /* bottom: 0;
+    right: 0; */
+    border-radius: 12px;
+
+  }
+
+  button#locateButton {
+    background-color: deepskyblue;
+    font-family: "Times New Roman", Times, serif;
+    padding: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin: 10px;
+    /* bottom: 0;
+    right: 0; */
+    border-radius: 12px;
   }
 
   .grid-item {
@@ -42,8 +58,11 @@
     /* padding: 20px; */
     /* font-size: 30px; */
     text-align: center;
+    border-radius: 12px;
+
   }
 
+  /* the errand buttons at bottom of page */
   .buttonErrand {
     background-color: deepskyblue;
     padding: 15px;
@@ -71,6 +90,7 @@
 
   }
 
+  /* places list attributes  */
   ul#places {
     list-style-type: none;
     /* display:flex; */
@@ -80,6 +100,13 @@
     overflow-y: scroll;
     height: 200px;
     /* visibility: collapse; */
+  }
+
+  .button-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
   }
 
   li#place {
@@ -94,7 +121,7 @@
   }
 
   .column {
-    width: 50% 50% display: flex;
+    width: 50%;
     flex-direction: column;
     flex: 1;
     overflow: hidden;
@@ -105,15 +132,22 @@
   h1#title {
     text-align: center;
   }
+
+  .buttonErrand#findStores {}
+
+  .buttonErrand#findGasStations {}
+
+  .buttonErrand#findDoctors {}
 </style>
 
 <body>
 
   <h1 id=title>Hello Google Map</h1>
-
-  <div id="googleMap"></div>
+  <div class="grid-item" style="float:right;">
+    <div id="googleMap"></div>
+  </div>
   <!-- <div class="grid-container"> -->
-  <div class="grid-container">
+  <div class="column">
     <div class="grid-item" style="border-width:thin;border-style:solid;">
       <h2>Places</h2>
     </div>
@@ -124,53 +158,48 @@
     <div class="grid-item">
       <button id="moreButton">More</button>
     </div>
-  </div>
-  <!-- </div> -->
+    <!-- </div> -->
 
-  <div class="column">
-    <div class="grid-container">
-      <div class="grid-item">
-        <!-- <p>
+
+    <div class="grid-item">
+      <!-- <p>
             This page was built in order to practice using the google maps api. Currently
             I'm working on orienting the map on the screen and formatting text around
             it. I would like to add a button that allows a user to see their location
             on the map.
         </p> -->
-      </div>
-      <div class="grid-item">
-        <p>
-          <b>
-            Press this button to snap the map to your current location.
-          </b>
-        </p>
-        <button id="locateButton" onclick="getLocation()">Get Location</button>
-      </div>
-      <div class="grid-item">
-        <p>
-          By finding your location I can get your zipcode using the geocoding api
-        </p>
-        <p>
-          Your current zipcode is:
-        </p>
-        <p id="zip"></p>
-      </div>
+    </div>
+    <div class="grid-item">
+      <p>
+        <b>
+          Press this button to snap the map to your current location.
+        </b>
+      </p>
+      <button id="locateButton" onclick="getLocation()">Get Location</button>
+    </div>
+    <div class="grid-item">
+      <p>
+        By finding your location I can get your zipcode using the geocoding api
+      </p>
+      <p>
+        Your current zipcode is:
+      </p>
+      <p id="zip"></p>
     </div>
 
-    <div class="grid-container">
-      <div class="grid-item">
-        <p style="padding:15px">Here, I'm trying to set up buttons of errands to run, my plan
-          is to let the user choose what they want to do and where they want run the
-          errand. After receiving information I want to give an estimated time to travel and
-          do all tasks
-      </div>
+    <div class="grid-item">
+      <p style="padding:15px">Here, I'm trying to set up buttons of errands to run, my plan
+        is to let the user choose what they want to do and where they want run the
+        errand. After receiving information I want to give an estimated time to travel and
+        do all tasks
+      </p>
     </div>
-    <div class="grid-container">
-      <div class="grid-item">
-        <div class="column">
-          <button class=buttonErrand disabled onclick="findStores()">Go to Store</button>
-          <button class=buttonErrand disabled onclick="findGasStations()">Get Gas</button>
-          <button class=buttonErrand disabled on click="findDoctors()">Go to Doctor</button>
-        </div>
+    <div class="grid-item">
+      <div class="button-grid">
+        <button class="buttonErrand" id="findStores" disabled onclick="findStores()">Go to Store</button>
+        <button class="buttonErrand" id="getGas" disabled onclick="findGasStations()">Get Gas</button>
+        <button class="buttonErrand" id="getDoctors" disabled onclick="findDoctors()">Go to Doctor</button>
+
       </div>
     </div>
   </div>
