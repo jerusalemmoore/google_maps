@@ -1,4 +1,5 @@
 "use strict";
+//initialize google map and infowindow for map
 let map, infoWindow;
 //current position
 var pos;
@@ -15,7 +16,7 @@ function initMap() {
 
   // return map;
 }
-
+//action after pressing "get location" button
 function getLocation() {
   infoWindow = new google.maps.InfoWindow();
   const geocoder = new google.maps.Geocoder();
@@ -70,6 +71,8 @@ function findStores() {
   //UTILIZING GOOGLE PLACES
   const service = new google.maps.places.PlacesService(map);
   let getNextPage;
+  const listHeader = document.getElementById("listHeader");
+  listHeader.innerHTML = "Stores Near You"
   const moreButton = document.getElementById("moreButton");
   if (pos == null) {
     return;
@@ -80,6 +83,7 @@ function findStores() {
       getNextPage();
     }
   };
+  //declare radius and store type to search
   service.nearbySearch({
       location: pos,
       radius: 5000,
@@ -104,6 +108,8 @@ function findGasStations() {
   //UTILIZING GOOGLE PLACES
   const service = new google.maps.places.PlacesService(map);
   let getNextPage;
+  const listHeader = document.getElementById("listHeader");
+  listHeader.innerHTML = "Gas Stations Near You"
   const moreButton = document.getElementById("moreButton");
   if (pos == null) {
     return;
@@ -139,6 +145,8 @@ function findDoctors() {
   const service = new google.maps.places.PlacesService(map);
   let getNextPage;
   const moreButton = document.getElementById("moreButton");
+  const listHeader = document.getElementById("listHeader");
+  listHeader.innerHTML = "Hospitals Near You"
   if (pos == null) {
     return;
   }
@@ -177,12 +185,13 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   );
   infoWindow.open(map);
 }
-
+//add list of places to map with symbols
+//you need to augment this so location images don't reprint
 function addPlaces(places, map) {
   var placesList = document.getElementById("places");
   placesList.innerHTML = "";
 
-
+  console.log(places);
   for (const place of places) {
     if (place.geometry && place.geometry.location) {
       const image = {
