@@ -68,7 +68,8 @@
     border-style: solid;
     background-color: rgba(255, 255, 255, 0.8);
     /* border: 1px solid rgba(0, 0, 0, 0.8); */
-    /* padding: 20px; */
+    padding-left: 15px;
+    padding-right: 15px;
     /* font-size: 30px; */
     text-align: center;
     border-radius: 12px;
@@ -161,11 +162,31 @@
 <body>
 
   <h1 id=title>Hello Google Map</h1>
+  <!-- Body of page -->
   <div class="row">
-
-    <!-- <div class="grid-container"> -->
+    <!-- LEFT COLUMN -->
     <div class="column">
-      <div class="grid-item">
+      <div class="grid-item" id="googleMap">
+      </div>
+
+      <div class="grid-item" id="errandsBox">
+        <p style="padding:15px">Here, I'm trying to set up buttons of errands to run, my plan
+          is to let the user choose what they want to do and where they want run the
+          errand. After receiving information I want to give an estimated time to travel and
+          do all tasks
+        </p>
+
+        <div class="button-grid">
+          <button class="buttonErrand" id="findStores" disabled onclick="findStores()"></button>
+          <button class="buttonErrand" id="findGas" disabled onclick="findGasStations()"></button>
+          <button class="buttonErrand" id="findDoctors" disabled onclick="findDoctors()"></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="column">
+      <div class="grid-item" id="introBox">
         <p>
           This page was built in order to practice using the Google Maps API. Currently
           I'm working on orienting the map on the screen and formatting text around
@@ -173,19 +194,13 @@
           on the map.
         </p>
       </div>
-
-      <!-- </div> -->
-
-
-
-      <div class="grid-item">
+      <div class="grid-item" id="getZipBox">
         <p>
           <b>
             Press this button to snap the map to your current location.
           </b>
         </p>
         <button id="locateButton" onclick="getLocation()">Get Location</button>
-
         <p>
           By finding your location I can get your zipcode using the geocoding api
         </p>
@@ -194,45 +209,29 @@
         </p>
         <p id="zip"></p>
       </div>
-      <div class="grid-item">
-        <p style="padding:15px">Here, I'm trying to set up buttons of errands to run, my plan
-          is to let the user choose what they want to do and where they want run the
-          errand. After receiving information I want to give an estimated time to travel and
-          do all tasks
-        </p>
-
-        <div class="button-grid">
-          <button class="buttonErrand" id="findStores" disabled onclick="findStores()">Go to Store</button>
-          <button class="buttonErrand" id="getGas" disabled onclick="findGasStations()">Get Gas</button>
-          <button class="buttonErrand" id="getDoctors" disabled onclick="findDoctors()">Go to Doctor</button>
-
-        </div>
-      </div>
-
-
-    </div>
-    <div class="column">
-      <div class="grid-item" id="googleMap">
-        <!-- <div id="googleMap"></div> -->
-      </div>
-      <div class="grid-item" style="border-width:thin;border-style:solid;">
+      <!-- PLACES LIST -->
+      <div class="grid-item" style="border-width:thin;border-style:solid;" id="placesList">
         <h2 id="listHeader">Places</h2>
-        <!-- </div>
-    <div class="grid-item" style="border-width:thin;border-style:solid;"> -->
         <div class="grid-item" id="placesBox">
           <ul id="places"></ul>
         </div>
-        <!-- <div class="grid-item"> -->
         <button id="moreButton">More</button>
       </div>
-
     </div>
   </div>
 
 
 </body>
-<script defer>
+<script async defer>
+  // Initialize page values
   document.getElementById("zip").innerHTML = "N/A";
+  // BUTTON LABELS
+  findStoresButton = document.getElementById("findStores");
+  findStoresButton.innerHTML = "Find Stores";
+  findGasButton = document.getElementById("findGas");
+  findGasButton.innerHTML = "Find Gas";
+  findDoctorsButton = document.getElementById("findDoctors");
+  findDoctorsButton.innerHTML = "Find Doctors";
 </script>
 
 </html>

@@ -1,6 +1,7 @@
 "use strict";
 //initialize google map and infowindow for map
 let map, infoWindow;
+var markers = [];
 //current position
 var pos;
 
@@ -90,7 +91,10 @@ function findStores() {
       type: "department_store"
     },
     (results, status, pagination) => {
-      if (status !== "OK" || !results) return;
+      if (status !== "OK" || !results){
+        Console.error('Error doing nearby department_store search');
+        return;
+      }
       addPlaces(results, map);
       moreButton.disabled = !pagination || !pagination.hasNextPage;
 
@@ -185,13 +189,28 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   );
   infoWindow.open(map);
 }
+function setMapOnAll(map) {
+  console.log(markers);
+  for (let i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
+}
 //add list of places to map with symbols
 //you need to augment this so location images don't reprint
 function addPlaces(places, map) {
-  var placesList = document.getElementById("places");
-  placesList.innerHTML = "";
+  if(!(markers.length == 0)){
+    setMapOnAll(null);
+    markers = [];
+  }
 
-  console.log(places);
+  // for(const place of places){
+  //   markers.push(place);
+  // }
+  var placesList = document.getElementById("places");
+
+  placesList.innerHTML = "";
+  console.log(markers);
+
   for (const place of places) {
     if (place.geometry && place.geometry.location) {
       const image = {
@@ -201,12 +220,14 @@ function addPlaces(places, map) {
         anchor: new google.maps.Point(17, 34),
         scaledSize: new google.maps.Size(25, 25),
       };
-      new google.maps.Marker({
+      var marker = new google.maps.Marker({
         map,
         icon: image,
         title: place.name,
         position: place.geometry.location,
       });
+      markers.push(marker)
+      // Add marker to list of places
       const li = document.createElement("li");
       li.setAttribute("id", "place");
       li.textContent = place.name;
